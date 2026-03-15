@@ -32,6 +32,21 @@ const offerings = [
   },
 ] as const;
 
+const projects = [
+  {
+    name: "Noir Table",
+    category: "Restaurant · Germany",
+  },
+  {
+    name: "Studio Merin",
+    category: "Beauty Salon · Berlin",
+  },
+  {
+    name: "Haus Lindner",
+    category: "Boutique Stay · Bavaria",
+  },
+] as const;
+
 const sectionClass = "mx-auto w-full max-w-[88rem] px-6 sm:px-8 lg:px-12";
 const cardClass =
   "rounded-[2.25rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] p-7 shadow-[0_28px_100px_rgba(0,0,0,0.32)] backdrop-blur-xl";
@@ -54,7 +69,24 @@ export default function Home() {
           <div className="masthead-enter flex items-center justify-between gap-6 border-b border-white/10 pb-5 text-[0.7rem] uppercase tracking-[0.32em] text-white/46">
             <span>Eric S.</span>
             <span className="hidden sm:inline">Web Designer</span>
-            <span>Germany</span>
+            <div className="flex items-center gap-4">
+              <span>Germany</span>
+              <a
+                href="https://github.com/ItsHezy"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Visit Eric S. on GitHub"
+                className="inline-flex items-center justify-center text-white/55 transition-opacity hover:text-white/80"
+              >
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4 fill-current"
+                >
+                  <path d="M12 0.5C5.372 0.5 0 5.873 0 12.5c0 5.303 3.438 9.8 8.205 11.387.6.11.82-.26.82-.577 0-.286-.01-1.044-.016-2.05-3.338.725-4.042-1.61-4.042-1.61-.546-1.386-1.333-1.755-1.333-1.755-1.09-.744.083-.729.083-.729 1.205.085 1.838 1.237 1.838 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.775.418-1.305.762-1.605-2.665-.303-5.467-1.333-5.467-5.932 0-1.31.468-2.382 1.235-3.222-.124-.303-.535-1.523.117-3.176 0 0 1.008-.323 3.3 1.23a11.5 11.5 0 0 1 3.005-.404c1.02.005 2.047.138 3.005.404 2.29-1.553 3.297-1.23 3.297-1.23.654 1.653.243 2.873.12 3.176.77.84 1.233 1.912 1.233 3.222 0 4.61-2.807 5.625-5.48 5.922.43.37.814 1.102.814 2.222 0 1.606-.015 2.9-.015 3.293 0 .32.216.693.825.575C20.565 22.295 24 17.8 24 12.5 24 5.873 18.627 0.5 12 0.5Z" />
+                </svg>
+              </a>
+            </div>
           </div>
           <div className="grid flex-1 gap-16 py-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(340px,0.8fr)] lg:items-center">
             <div className="max-w-4xl">
@@ -74,7 +106,7 @@ export default function Home() {
               <div className="hero-actions-enter mt-12 flex flex-col gap-4 sm:flex-row sm:items-center">
                 <a
                   href="#contact"
-                  className="premium-button inline-flex w-full items-center justify-center rounded-full border border-[#78bfff]/40 bg-[#78bfff] px-7 py-3.5 text-sm font-medium uppercase tracking-[0.2em] text-[#07111d] shadow-[0_0_60px_rgba(120,191,255,0.18)] hover:-translate-y-0.5 hover:bg-[#9cd0ff] sm:w-auto"
+                  className="premium-button inline-flex w-full items-center justify-center rounded-full border border-white/14 bg-white/[0.03] px-7 py-3.5 text-sm font-medium uppercase tracking-[0.2em] text-white/84 hover:-translate-y-0.5 hover:border-white/24 hover:bg-white/[0.06] sm:w-auto"
                 >
                   Let&apos;s Talk
                 </a>
@@ -190,6 +222,42 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="work" className="scroll-mt-20 py-20 sm:py-24">
+        <div className={sectionClass}>
+          <Reveal>
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-end">
+              <div className="max-w-3xl">
+                <p className={eyebrowClass}>Selected Work</p>
+                <h2 className="mt-5 font-serif text-4xl leading-tight tracking-[-0.05em] text-[#f6f3ee] sm:text-5xl">
+                  Recent projects shaped with the same calm, editorial eye.
+                </h2>
+              </div>
+              <div className="border-l border-white/8 pl-0 text-sm leading-7 text-white/46 lg:pl-8">
+                A small look at the kind of visual atmosphere and restraint I
+                build into client websites.
+              </div>
+            </div>
+          </Reveal>
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            {projects.map((project, index) => (
+              <Reveal key={project.name} delay={index * 120}>
+                <article className={`${cardClass} hover-card h-full p-6`}>
+                  <div className="h-64 rounded-[1.8rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]" />
+                  <div className="mt-6">
+                    <p className="text-[0.72rem] uppercase tracking-[0.32em] text-white/36">
+                      {project.category}
+                    </p>
+                    <h3 className="mt-4 font-serif text-[2rem] leading-none tracking-[-0.05em] text-[#f6f3ee]">
+                      {project.name}
+                    </h3>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="services" className="scroll-mt-20 py-20 sm:py-24">
         <div className={sectionClass}>
           <Reveal>
@@ -221,7 +289,7 @@ export default function Home() {
                 <article
                   className={`hover-card group relative flex h-full flex-col overflow-hidden rounded-[2.25rem] border p-8 shadow-[0_28px_100px_rgba(0,0,0,0.32)] backdrop-blur-xl ${
                     offering.featured
-                      ? "border-[#78bfff]/35 bg-[linear-gradient(180deg,rgba(120,191,255,0.15),rgba(255,255,255,0.04))]"
+                      ? "border-white/20 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.04))]"
                       : "border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))]"
                   }`}
                 >
@@ -239,7 +307,8 @@ export default function Home() {
                       </p>
                     </div>
                     {offering.featured ? (
-                      <span className="rounded-full border border-[#78bfff]/30 bg-[#78bfff]/12 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.2em] text-[#b7deff]">
+                      <span className="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.2em] text-white/46">
+                        <span className="h-1.5 w-1.5 rounded-full bg-white/46" />
                         Most Popular
                       </span>
                     ) : null}
