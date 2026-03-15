@@ -30,7 +30,7 @@ export function ContactForm({ email, inputClass }: ContactFormProps) {
         <div>
           <label
             htmlFor="name"
-            className="mb-2 block text-sm font-medium text-white/74"
+            className="mb-2 block text-[0.72rem] font-medium uppercase tracking-[0.28em] text-white/46"
           >
             Name
           </label>
@@ -47,7 +47,7 @@ export function ContactForm({ email, inputClass }: ContactFormProps) {
         <div>
           <label
             htmlFor="email"
-            className="mb-2 block text-sm font-medium text-white/74"
+            className="mb-2 block text-[0.72rem] font-medium uppercase tracking-[0.28em] text-white/46"
           >
             Email
           </label>
@@ -64,7 +64,7 @@ export function ContactForm({ email, inputClass }: ContactFormProps) {
         <div>
           <label
             htmlFor="message"
-            className="mb-2 block text-sm font-medium text-white/74"
+            className="mb-2 block text-[0.72rem] font-medium uppercase tracking-[0.28em] text-white/46"
           >
             Message
           </label>
@@ -80,21 +80,21 @@ export function ContactForm({ email, inputClass }: ContactFormProps) {
         </div>
         <button
           type="submit"
-          className="inline-flex items-center justify-center rounded-full border border-[#4ea7ff]/20 bg-[#4ea7ff] px-6 py-3 text-sm font-medium text-[#04111f] shadow-[0_0_40px_rgba(78,167,255,0.22)] hover:-translate-y-0.5 hover:bg-[#78bbff]"
+          className="inline-flex items-center justify-center rounded-full border border-[#78bfff]/30 bg-[#78bfff] px-6 py-3 text-sm font-medium uppercase tracking-[0.22em] text-[#07111d] shadow-[0_0_40px_rgba(120,191,255,0.16)] hover:-translate-y-0.5 hover:bg-[#9cd0ff]"
         >
           Send
         </button>
       </form>
-      <p className="mt-5 text-sm text-white/48">
+      <p className="mt-6 text-sm text-white/44">
         Email:{" "}
         <a
           href={`mailto:${email}`}
-          className="text-white/72 underline decoration-white/20 underline-offset-4 hover:text-[#9bd0ff]"
+          className="text-white/72 underline decoration-white/20 underline-offset-4 hover:text-[#b7deff]"
         >
           {email}
         </a>
       </p>
-      <p aria-live="polite" className="mt-3 min-h-6 text-sm text-[#9bd0ff]">
+      <p aria-live="polite" className="mt-3 min-h-6 text-sm text-[#b7deff]">
         {isSubmitted
           ? "Thanks. For now, the fastest way to reach me is by email."
           : ""}
