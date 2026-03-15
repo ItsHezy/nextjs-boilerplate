@@ -16,6 +16,8 @@ export function StickyScene({
 }: StickySceneProps) {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const shellRef = useRef<HTMLDivElement | null>(null);
+  const targetProgressRef = useRef(0);
+  const currentProgressRef = useRef(0);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -27,38 +29,59 @@ export function StickyScene({
 
     let frame = 0;
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-    // Keep a CSS progress value in sync with scroll for the sticky motion.
-    const update = () => {
-      frame = 0;
-
-      if (media.matches) {
-        shell.style.setProperty("--sticky-progress", "1");
-        shell.style.setProperty("--sticky-progress-inverse", "0");
-        return;
-      }
-
-      const rect = root.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const travel = Math.max(root.offsetHeight - viewportHeight, 1);
-      const scrolled = Math.min(Math.max(-rect.top, 0), travel);
-      const progress = scrolled / travel;
-
-      shell.style.setProperty("--sticky-progress", progress.toFixed(4));
+    const setProgress = (value: number) => {
+      shell.style.setProperty("--sticky-progress", value.toFixed(4));
       shell.style.setProperty(
         "--sticky-progress-inverse",
-        (1 - progress).toFixed(4)
+        (1 - value).toFixed(4)
       );
     };
 
-    const requestUpdate = () => {
-      if (frame) {
+    const animate = () => {
+      if (media.matches) {
+        currentProgressRef.current = 1;
+        targetProgressRef.current = 1;
+        setProgress(1);
+        frame = 0;
         return;
       }
 
-      frame = window.requestAnimationFrame(update);
+      const delta = targetProgressRef.current - currentProgressRef.current;
+
+      if (Math.abs(delta) < 0.0015) {
+        currentProgressRef.current = targetProgressRef.current;
+        setProgress(currentProgressRef.current);
+        frame = 0;
+        return;
+      }
+
+      currentProgressRef.current += delta * 0.12;
+      setProgress(currentProgressRef.current);
+      frame = window.requestAnimationFrame(animate);
     };
 
+    // Keep a CSS progress value in sync with scroll for the sticky motion.
+    const update = () => {
+      if (media.matches) {
+        targetProgressRef.current = 1;
+      } else {
+        const rect = root.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const travel = Math.max(root.offsetHeight - viewportHeight, 1);
+        const scrolled = Math.min(Math.max(-rect.top, 0), travel);
+        targetProgressRef.current = scrolled / travel;
+      }
+
+      if (!frame) {
+        frame = window.requestAnimationFrame(animate);
+      }
+    };
+
+    const requestUpdate = () => {
+      update();
+    };
+
+    setProgress(0);
     update();
     window.addEventListener("scroll", requestUpdate, { passive: true });
     window.addEventListener("resize", requestUpdate);

@@ -113,53 +113,53 @@ button {
   will-change: transform, opacity;
   transform: translate3d(
       0,
-      calc(var(--sticky-progress-inverse) * 18px),
+      calc(var(--sticky-progress-inverse) * 10px),
       0
     )
-    scale(calc(0.975 + var(--sticky-progress) * 0.025));
-  opacity: calc(0.38 + var(--sticky-progress) * 0.62);
+    scale(calc(0.985 + var(--sticky-progress) * 0.015));
+  opacity: calc(0.58 + var(--sticky-progress) * 0.42);
 }
 
 .sticky-copy {
   will-change: transform, opacity;
   transform: translate3d(
     0,
-    calc(var(--sticky-progress-inverse) * 28px),
+    calc(var(--sticky-progress-inverse) * 16px),
     0
   );
-  opacity: calc(0.3 + var(--sticky-progress) * 0.7);
+  opacity: calc(0.52 + var(--sticky-progress) * 0.48);
 }
 
 .sticky-panel-left {
   will-change: transform, opacity;
   transform: translate3d(
-      calc(var(--sticky-progress-inverse) * -34px),
-      calc(var(--sticky-progress-inverse) * 20px),
+      calc(var(--sticky-progress-inverse) * -18px),
+      calc(var(--sticky-progress-inverse) * 12px),
       0
     )
-    scale(calc(0.97 + var(--sticky-progress) * 0.03));
-  opacity: calc(0.3 + var(--sticky-progress) * 0.7);
+    scale(calc(0.985 + var(--sticky-progress) * 0.015));
+  opacity: calc(0.5 + var(--sticky-progress) * 0.5);
 }
 
 .sticky-panel-right {
   will-change: transform, opacity;
   transform: translate3d(
-      calc(var(--sticky-progress-inverse) * 38px),
-      calc(var(--sticky-progress-inverse) * 12px),
+      calc(var(--sticky-progress-inverse) * 20px),
+      calc(var(--sticky-progress-inverse) * 8px),
       0
     )
-    scale(calc(0.95 + var(--sticky-progress) * 0.05));
-  opacity: calc(0.26 + var(--sticky-progress) * 0.74);
+    scale(calc(0.975 + var(--sticky-progress) * 0.025));
+  opacity: calc(0.48 + var(--sticky-progress) * 0.52);
 }
 
 .sticky-grid {
   will-change: transform, opacity;
   transform: translate3d(
     0,
-    calc(var(--sticky-progress-inverse) * 24px),
+    calc(var(--sticky-progress-inverse) * 14px),
     0
   );
-  opacity: calc(0.32 + var(--sticky-progress) * 0.68);
+  opacity: calc(0.52 + var(--sticky-progress) * 0.48);
 }
 
 .sticky-card {
@@ -170,8 +170,8 @@ button {
       calc(var(--sticky-progress-inverse) * var(--sticky-card-shift)),
       0
     )
-    scale(calc(0.94 + var(--sticky-progress) * 0.06));
-  opacity: calc(0.24 + var(--sticky-progress) * 0.76);
+    scale(calc(0.975 + var(--sticky-progress) * 0.025));
+  opacity: calc(0.46 + var(--sticky-progress) * 0.54);
 }
 
 .sticky-divider {

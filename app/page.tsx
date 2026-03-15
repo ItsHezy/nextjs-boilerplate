@@ -49,7 +49,7 @@ export default function Home() {
     <main className="relative overflow-x-clip">
       <section className="relative">
         <StickyScene
-          className="min-h-[180vh]"
+          className="min-h-[150vh]"
           contentClassName={`${sectionClass} py-8 sm:py-10 lg:py-12`}
         >
           <div className="sticky-stage relative flex min-h-screen flex-col justify-between">
@@ -149,7 +149,7 @@ export default function Home() {
 
       <section id="about" className="scroll-mt-20">
         <StickyScene
-          className="min-h-[150vh]"
+          className="min-h-[128vh]"
           contentClassName={`${sectionClass} flex min-h-screen items-center py-20 sm:py-24`}
         >
           <div className="sticky-stage w-full">
@@ -207,7 +207,7 @@ export default function Home() {
 
       <section id="services" className="scroll-mt-20">
         <StickyScene
-          className="min-h-[170vh]"
+          className="min-h-[145vh]"
           contentClassName={`${sectionClass} flex min-h-screen items-center py-20 sm:py-24`}
         >
           <div className="sticky-stage w-full">
@@ -294,7 +294,7 @@ export default function Home() {
 
       <section id="contact" className="scroll-mt-20">
         <StickyScene
-          className="min-h-[145vh]"
+          className="min-h-[124vh]"
           contentClassName={`${sectionClass} flex min-h-screen items-center py-20 sm:py-24`}
         >
           <div className="sticky-stage w-full">
