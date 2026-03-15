@@ -1,15 +1,21 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 
 type RevealProps = {
   children: ReactNode;
   className?: string;
   delay?: number;
+  style?: CSSProperties;
 };
 
-export function Reveal({ children, className = "", delay = 0 }: RevealProps) {
+export function Reveal({
+  children,
+  className = "",
+  delay = 0,
+  style,
+}: RevealProps) {
   const [isVisible, setIsVisible] = useState(false);
   const elementRef = useRef<HTMLDivElement | null>(null);
 
@@ -46,7 +52,7 @@ export function Reveal({ children, className = "", delay = 0 }: RevealProps) {
       ref={elementRef}
       className={["reveal", className].filter(Boolean).join(" ")}
       data-visible={isVisible}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ transitionDelay: `${delay}ms`, ...style }}
     >
       {children}
     </div>
