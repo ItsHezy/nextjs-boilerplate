@@ -103,83 +103,6 @@ button {
   transform: translateY(0);
 }
 
-.sticky-scene-shell {
-  --sticky-progress: 0;
-  --sticky-progress-inverse: 1;
-  width: 100%;
-}
-
-.sticky-stage {
-  will-change: transform, opacity;
-  transform: translate3d(
-      0,
-      calc(var(--sticky-progress-inverse) * 10px),
-      0
-    )
-    scale(calc(0.985 + var(--sticky-progress) * 0.015));
-  opacity: calc(0.58 + var(--sticky-progress) * 0.42);
-}
-
-.sticky-copy {
-  will-change: transform, opacity;
-  transform: translate3d(
-    0,
-    calc(var(--sticky-progress-inverse) * 16px),
-    0
-  );
-  opacity: calc(0.52 + var(--sticky-progress) * 0.48);
-}
-
-.sticky-panel-left {
-  will-change: transform, opacity;
-  transform: translate3d(
-      calc(var(--sticky-progress-inverse) * -18px),
-      calc(var(--sticky-progress-inverse) * 12px),
-      0
-    )
-    scale(calc(0.985 + var(--sticky-progress) * 0.015));
-  opacity: calc(0.5 + var(--sticky-progress) * 0.5);
-}
-
-.sticky-panel-right {
-  will-change: transform, opacity;
-  transform: translate3d(
-      calc(var(--sticky-progress-inverse) * 20px),
-      calc(var(--sticky-progress-inverse) * 8px),
-      0
-    )
-    scale(calc(0.975 + var(--sticky-progress) * 0.025));
-  opacity: calc(0.48 + var(--sticky-progress) * 0.52);
-}
-
-.sticky-grid {
-  will-change: transform, opacity;
-  transform: translate3d(
-    0,
-    calc(var(--sticky-progress-inverse) * 14px),
-    0
-  );
-  opacity: calc(0.52 + var(--sticky-progress) * 0.48);
-}
-
-.sticky-card {
-  --sticky-card-shift: 24px;
-  will-change: transform, opacity;
-  transform: translate3d(
-      0,
-      calc(var(--sticky-progress-inverse) * var(--sticky-card-shift)),
-      0
-    )
-    scale(calc(0.975 + var(--sticky-progress) * 0.025));
-  opacity: calc(0.46 + var(--sticky-progress) * 0.54);
-}
-
-.sticky-divider {
-  transform: scaleX(calc(0.9 + var(--sticky-progress) * 0.1));
-  transform-origin: left center;
-  opacity: calc(0.32 + var(--sticky-progress) * 0.68);
-}
-
 .masthead-enter {
   animation: masthead-in 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -452,17 +375,6 @@ button {
   .reveal[data-visible="true"] {
     opacity: 1;
     transform: none;
-  }
-
-  .sticky-stage,
-  .sticky-copy,
-  .sticky-panel-left,
-  .sticky-panel-right,
-  .sticky-grid,
-  .sticky-card,
-  .sticky-divider {
-    opacity: 1 !important;
-    transform: none !important;
   }
 
   .masthead-enter,
