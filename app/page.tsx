@@ -134,11 +134,12 @@ export default function Home() {
               <div className="hero-panel-ambient hero-panel-ambient-one" />
               <div className="hero-panel-ambient hero-panel-ambient-two" />
               <div className="hero-panel-content">
-                <div className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-[#78bfff]/55 to-transparent" />
-                <p className="text-[0.72rem] uppercase tracking-[0.34em] text-white/42">
-                  Signature Standard
-                </p>
-                <div className={ruleClass} />
+                <div className="flex items-center gap-4">
+                  <p className="shrink-0 text-[0.72rem] uppercase tracking-[0.34em] text-white/42">
+                    Signature Standard
+                  </p>
+                  <div className="h-px flex-1 bg-gradient-to-r from-white/10 via-[#78bfff]/40 to-transparent" />
+                </div>
                 <div className="mt-8 space-y-8">
                   <div>
                     <p className="text-sm text-white/40">First Impression</p>
