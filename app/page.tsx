@@ -44,52 +44,59 @@ const ruleClass = "section-rule mt-8 h-px w-full";
 export default function Home() {
   return (
     <main className="relative overflow-x-clip">
-      <section className={`${sectionClass} min-h-screen py-8 sm:py-10 lg:py-12`}>
+      <section className={`${sectionClass} relative min-h-screen py-8 sm:py-10 lg:py-12`}>
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="hero-orb hero-orb-one" />
+          <div className="hero-orb hero-orb-two" />
+          <div className="hero-line" />
+        </div>
         <Reveal className="flex min-h-screen flex-col">
-          <div className="flex items-center justify-between gap-6 border-b border-white/10 pb-5 text-[0.7rem] uppercase tracking-[0.32em] text-white/46">
-            <span>Eric S. Atelier</span>
-            <span>Issue 01</span>
+          <div className="masthead-enter flex items-center justify-between gap-6 border-b border-white/10 pb-5 text-[0.7rem] uppercase tracking-[0.32em] text-white/46">
+            <span>Eric S.</span>
+            <span className="hidden sm:inline">Web Designer</span>
             <span>Germany</span>
           </div>
           <div className="grid flex-1 gap-16 py-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(340px,0.8fr)] lg:items-center">
             <div className="max-w-4xl">
-              <p className={eyebrowClass}>Editorial Web Design</p>
-              <h1 className="mt-8 max-w-4xl font-serif text-[4.4rem] leading-[0.88] tracking-[-0.06em] text-[#f6f3ee] sm:text-[5.8rem] lg:text-[8.6rem]">
+              <p className={`${eyebrowClass} hero-kicker-enter`}>
+                Editorial Web Design
+              </p>
+              <h1 className="hero-title-enter mt-8 max-w-4xl font-serif text-[4.4rem] leading-[0.88] tracking-[-0.06em] text-[#f6f3ee] sm:text-[5.8rem] lg:text-[8.6rem]">
                 Eric S.
               </h1>
-              <p className="mt-8 max-w-2xl text-lg leading-8 text-[#ebe5dc]/72 sm:text-xl lg:text-[1.4rem] lg:leading-9">
+              <p className="hero-copy-enter mt-8 max-w-2xl text-lg leading-8 text-[#ebe5dc]/72 sm:text-xl lg:text-[1.4rem] lg:leading-9">
                 Web Designer {"\u2014"} I build modern websites for businesses
                 that deserve better.
               </p>
-              <p className="mt-6 max-w-xl text-sm uppercase tracking-[0.28em] text-white/38">
+              <p className="hero-copy-enter mt-6 max-w-xl text-sm uppercase tracking-[0.28em] text-white/38">
                 Designed to feel more like a private publication than a mass-made template.
               </p>
-              <div className="mt-12 flex flex-col gap-4 sm:flex-row sm:items-center">
+              <div className="hero-actions-enter mt-12 flex flex-col gap-4 sm:flex-row sm:items-center">
                 <a
                   href="#contact"
-                  className="inline-flex w-full items-center justify-center rounded-full border border-[#78bfff]/40 bg-[#78bfff] px-7 py-3.5 text-sm font-medium uppercase tracking-[0.2em] text-[#07111d] shadow-[0_0_60px_rgba(120,191,255,0.18)] hover:-translate-y-0.5 hover:bg-[#9cd0ff] sm:w-auto"
+                  className="premium-button inline-flex w-full items-center justify-center rounded-full border border-[#78bfff]/40 bg-[#78bfff] px-7 py-3.5 text-sm font-medium uppercase tracking-[0.2em] text-[#07111d] shadow-[0_0_60px_rgba(120,191,255,0.18)] hover:-translate-y-0.5 hover:bg-[#9cd0ff] sm:w-auto"
                 >
                   Let&apos;s Talk
                 </a>
                 <a
                   href="#services"
-                  className="inline-flex items-center justify-center rounded-full border border-white/12 px-7 py-3.5 text-sm uppercase tracking-[0.2em] text-white/62 hover:border-[#78bfff]/30 hover:text-white sm:w-auto"
+                  className="glass-button inline-flex items-center justify-center rounded-full border border-white/12 px-7 py-3.5 text-sm uppercase tracking-[0.2em] text-white/62 hover:border-[#78bfff]/30 hover:text-white sm:w-auto"
                 >
                   See Pricing
                 </a>
               </div>
             </div>
-            <div className={`${cardClass} relative overflow-hidden border-white/12`}>
+            <div className={`${cardClass} hero-panel hero-panel-enter relative overflow-hidden border-white/12 hover-card`}>
               <div className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-[#78bfff]/55 to-transparent" />
               <p className="text-[0.72rem] uppercase tracking-[0.34em] text-white/42">
-                Cover Story
+                Signature Standard
               </p>
               <div className={ruleClass} />
               <div className="mt-8 space-y-8">
                 <div>
-                  <p className="text-sm text-white/40">Positioning</p>
+                  <p className="text-sm text-white/40">First Impression</p>
                   <p className="mt-3 font-serif text-4xl leading-tight tracking-[-0.04em] text-[#f6f3ee]">
-                    Websites with the calm confidence of something expensive.
+                    A website should feel tailored, calm, and quietly expensive from the first second.
                   </p>
                 </div>
                 <div className="grid gap-5 border-t border-white/8 pt-6 sm:grid-cols-3 sm:gap-4">
@@ -98,23 +105,23 @@ export default function Home() {
                       Tone
                     </p>
                     <p className="mt-2 text-sm leading-6 text-white/62">
-                      Minimal, elegant, highly considered.
+                      Quiet, cinematic, and controlled.
                     </p>
                   </div>
                   <div>
                     <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/34">
-                      Audience
+                      Rhythm
                     </p>
                     <p className="mt-2 text-sm leading-6 text-white/62">
-                      Small businesses that want to look unmistakably premium.
+                      Large statements, generous spacing, no visual panic.
                     </p>
                   </div>
                   <div>
                     <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/34">
-                      Outcome
+                      Signal
                     </p>
                     <p className="mt-2 text-sm leading-6 text-white/62">
-                      Better trust, better first impressions, better inquiries.
+                      Premium enough to raise trust before a word is read.
                     </p>
                   </div>
                 </div>
@@ -206,7 +213,7 @@ export default function Home() {
                 className={`h-full ${offering.featured ? "lg:-translate-y-5" : ""}`}
               >
                 <article
-                  className={`relative flex h-full flex-col overflow-hidden rounded-[2.25rem] border p-8 shadow-[0_28px_100px_rgba(0,0,0,0.32)] backdrop-blur-xl ${
+                  className={`hover-card group relative flex h-full flex-col overflow-hidden rounded-[2.25rem] border p-8 shadow-[0_28px_100px_rgba(0,0,0,0.32)] backdrop-blur-xl ${
                     offering.featured
                       ? "border-[#78bfff]/35 bg-[linear-gradient(180deg,rgba(120,191,255,0.15),rgba(255,255,255,0.04))]"
                       : "border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))]"
