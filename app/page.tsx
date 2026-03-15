@@ -1,5 +1,9 @@
+import Image from "next/image";
 import { ContactForm } from "@/components/contact-form";
 import { Reveal } from "@/components/reveal";
+import communicationAppImage from "../8fca7668871707.5b6c37054260a-3360977797.png";
+import boutiqueAppImage from "../Good-Looking-Website-Design-2-620x465-3469251146.jpg";
+import animalAppImage from "../b05bee68871707.5b6c370547808-3224791585.png";
 
 const offerings = [
   {
@@ -34,16 +38,22 @@ const offerings = [
 
 const projects = [
   {
-    name: "Noir Table",
-    category: "Restaurant · Germany",
+    name: "Communication App",
+    category: "Social Platform \u00b7 Mobile",
+    image: communicationAppImage,
+    alt: "Communication app landing page with messaging interface and phone mockup",
   },
   {
-    name: "Studio Merin",
-    category: "Beauty Salon · Berlin",
+    name: "Animal App",
+    category: "Nature Discovery \u00b7 Editorial",
+    image: animalAppImage,
+    alt: "Animal app concept with a large lizard hero image and discovery layout",
   },
   {
-    name: "Haus Lindner",
-    category: "Boutique Stay · Bavaria",
+    name: "Boutique App",
+    category: "Fashion Boutique \u00b7 Luxury",
+    image: boutiqueAppImage,
+    alt: "Boutique fashion app concept with editorial styling and a red circular backdrop",
   },
 ] as const;
 
@@ -241,8 +251,18 @@ export default function Home() {
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
             {projects.map((project, index) => (
               <Reveal key={project.name} delay={index * 120}>
-                <article className={`${cardClass} hover-card h-full p-6`}>
-                  <div className="h-64 rounded-[1.8rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]" />
+                <article className={`${cardClass} hover-card group h-full p-6`}>
+                  <div className="relative h-64 overflow-hidden rounded-[1.8rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+                    <Image
+                      src={project.image}
+                      alt={project.alt}
+                      fill
+                      sizes="(min-width: 1024px) 28rem, 100vw"
+                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,6,6,0.08),rgba(6,6,6,0.46))]" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_42%)]" />
+                  </div>
                   <div className="mt-6">
                     <p className="text-[0.72rem] uppercase tracking-[0.32em] text-white/36">
                       {project.category}
