@@ -136,10 +136,10 @@ button {
 }
 
 .hero-orb-one {
-  top: 8%;
-  left: -8%;
-  width: 20rem;
-  height: 20rem;
+  top: 7%;
+  left: 2%;
+  width: 24rem;
+  height: 24rem;
   background: radial-gradient(circle, rgba(120, 191, 255, 0.18), transparent 68%);
   animation: drift-one 16s ease-in-out infinite alternate;
 }
@@ -228,20 +228,43 @@ button {
 
 .hero-panel {
   position: relative;
+  isolation: isolate;
 }
 
 .hero-panel::before {
-  content: "";
+  content: none;
+}
+
+.hero-panel-ambient {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    140deg,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(255, 255, 255, 0) 34%,
-    rgba(120, 191, 255, 0.08) 100%
-  );
-  opacity: 0.8;
+  border-radius: 9999px;
   pointer-events: none;
+  z-index: 0;
+}
+
+.hero-panel-ambient-one {
+  top: 8%;
+  left: -18%;
+  width: 22rem;
+  height: 22rem;
+  background: radial-gradient(circle, rgba(120, 191, 255, 0.2), transparent 68%);
+  filter: blur(18px);
+  animation: drift-three 15s ease-in-out infinite alternate;
+}
+
+.hero-panel-ambient-two {
+  right: -8%;
+  bottom: -16%;
+  width: 16rem;
+  height: 16rem;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 72%);
+  filter: blur(16px);
+  animation: drift-two 18s ease-in-out infinite alternate;
+}
+
+.hero-panel-content {
+  position: relative;
+  z-index: 1;
 }
 
 .section-rule {
@@ -311,6 +334,16 @@ button {
   }
 }
 
+@keyframes drift-three {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(2rem, -1rem, 0) scale(1.07);
+  }
+}
+
 @keyframes line-shift {
   0%,
   100% {
@@ -352,7 +385,9 @@ button {
   .hero-panel-enter,
   .hero-orb-one,
   .hero-orb-two,
-  .hero-line {
+  .hero-line,
+  .hero-panel-ambient-one,
+  .hero-panel-ambient-two {
     animation: none !important;
   }
 }

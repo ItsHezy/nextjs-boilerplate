@@ -45,7 +45,7 @@ export default function Home() {
   return (
     <main className="relative overflow-x-clip">
       <section className={`${sectionClass} relative min-h-screen py-8 sm:py-10 lg:py-12`}>
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 overflow-visible">
           <div className="hero-orb hero-orb-one" />
           <div className="hero-orb hero-orb-two" />
           <div className="hero-line" />
@@ -86,43 +86,47 @@ export default function Home() {
                 </a>
               </div>
             </div>
-            <div className={`${cardClass} hero-panel hero-panel-enter relative overflow-hidden border-white/12 hover-card`}>
-              <div className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-[#78bfff]/55 to-transparent" />
-              <p className="text-[0.72rem] uppercase tracking-[0.34em] text-white/42">
-                Signature Standard
-              </p>
-              <div className={ruleClass} />
-              <div className="mt-8 space-y-8">
-                <div>
-                  <p className="text-sm text-white/40">First Impression</p>
-                  <p className="mt-3 font-serif text-4xl leading-tight tracking-[-0.04em] text-[#f6f3ee]">
-                    A website should feel tailored, calm, and quietly expensive from the first second.
-                  </p>
-                </div>
-                <div className="grid gap-5 border-t border-white/8 pt-6 sm:grid-cols-3 sm:gap-4">
+            <div className={`${cardClass} hero-panel hero-panel-enter relative border-white/12 hover-card`}>
+              <div className="hero-panel-ambient hero-panel-ambient-one" />
+              <div className="hero-panel-ambient hero-panel-ambient-two" />
+              <div className="hero-panel-content">
+                <div className="absolute inset-x-7 top-0 h-px bg-gradient-to-r from-transparent via-[#78bfff]/55 to-transparent" />
+                <p className="text-[0.72rem] uppercase tracking-[0.34em] text-white/42">
+                  Signature Standard
+                </p>
+                <div className={ruleClass} />
+                <div className="mt-8 space-y-8">
                   <div>
-                    <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/34">
-                      Tone
-                    </p>
-                    <p className="mt-2 text-sm leading-6 text-white/62">
-                      Quiet, cinematic, and controlled.
+                    <p className="text-sm text-white/40">First Impression</p>
+                    <p className="mt-3 font-serif text-4xl leading-tight tracking-[-0.04em] text-[#f6f3ee]">
+                      A website should feel tailored, calm, and quietly expensive from the first second.
                     </p>
                   </div>
-                  <div>
-                    <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/34">
-                      Rhythm
-                    </p>
-                    <p className="mt-2 text-sm leading-6 text-white/62">
-                      Large statements, generous spacing, no visual panic.
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/34">
-                      Signal
-                    </p>
-                    <p className="mt-2 text-sm leading-6 text-white/62">
-                      Premium enough to raise trust before a word is read.
-                    </p>
+                  <div className="grid gap-5 border-t border-white/8 pt-6 sm:grid-cols-3 sm:gap-4">
+                    <div>
+                      <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/34">
+                        Tone
+                      </p>
+                      <p className="mt-2 text-sm leading-6 text-white/62">
+                        Quiet, cinematic, and controlled.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/34">
+                        Rhythm
+                      </p>
+                      <p className="mt-2 text-sm leading-6 text-white/62">
+                        Large statements, generous spacing, no visual panic.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/34">
+                        Signal
+                      </p>
+                      <p className="mt-2 text-sm leading-6 text-white/62">
+                        Premium enough to raise trust before a word is read.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
