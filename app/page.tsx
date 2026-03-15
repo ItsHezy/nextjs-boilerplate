@@ -1,65 +1,388 @@
 import Image from "next/image";
+import { ContactForm } from "@/components/contact-form";
+import { Reveal } from "@/components/reveal";
+import communicationAppImage from "../8fca7668871707.5b6c37054260a-3360977797.png";
+import boutiqueAppImage from "../Good-Looking-Website-Design-2-620x465-3469251146.jpg";
+import animalAppImage from "../b05bee68871707.5b6c370547808-3224791585.png";
+
+const offerings = [
+  {
+    name: "Basic",
+    price: "\u20ac50",
+    summary:
+      "A crisp starter presence for small businesses that need to look cleaner immediately.",
+    features: ["3-5 pages", "Mobile-friendly layout", "Contact form"],
+    featured: false,
+  },
+  {
+    name: "Standard",
+    price: "\u20ac100",
+    summary:
+      "The most balanced package for businesses that want more polish, structure, and credibility.",
+    features: ["Booking integration", "Gallery", "SEO basics"],
+    featured: true,
+  },
+  {
+    name: "Premium",
+    price: "\u20ac200",
+    summary:
+      "A more cinematic presentation with custom visual treatment and refined finishing details.",
+    features: [
+      "Custom design",
+      "Animations",
+      "Google My Business setup",
+    ],
+    featured: false,
+  },
+] as const;
+
+const projects = [
+  {
+    name: "Communication App",
+    category: "Social Platform \u00b7 Mobile",
+    image: communicationAppImage,
+    alt: "Communication app landing page with messaging interface and phone mockup",
+  },
+  {
+    name: "Animal App",
+    category: "Nature Discovery \u00b7 Editorial",
+    image: animalAppImage,
+    alt: "Animal app concept with a large lizard hero image and discovery layout",
+  },
+  {
+    name: "Boutique App",
+    category: "Fashion Boutique \u00b7 Luxury",
+    image: boutiqueAppImage,
+    alt: "Boutique fashion app concept with editorial styling and a red circular backdrop",
+  },
+] as const;
+
+const sectionClass = "mx-auto w-full max-w-[88rem] px-6 sm:px-8 lg:px-12";
+const cardClass =
+  "rounded-[2.25rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] p-7 shadow-[0_28px_100px_rgba(0,0,0,0.32)] backdrop-blur-xl";
+const inputClass =
+  "w-full rounded-[1.6rem] border border-white/10 bg-white/[0.03] px-5 py-4 text-sm text-[#f6f3ee] outline-none placeholder:text-white/28 focus:border-[#78bfff]/70 focus:bg-white/[0.05] focus:ring-2 focus:ring-[#78bfff]/18";
+const eyebrowClass =
+  "text-[0.7rem] font-medium uppercase tracking-[0.36em] text-[#9cd0ff]";
+const ruleClass = "section-rule mt-8 h-px w-full";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="relative overflow-x-clip">
+      <section className={`${sectionClass} relative min-h-screen py-8 sm:py-10 lg:py-12`}>
+        <div className="pointer-events-none absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 overflow-visible">
+          <div className="hero-orb hero-orb-one" />
+          <div className="hero-orb hero-orb-two" />
+          <div className="hero-line" />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <Reveal className="flex min-h-screen flex-col">
+          <div className="masthead-enter flex items-center justify-between gap-6 border-b border-white/10 pb-5 text-[0.7rem] uppercase tracking-[0.32em] text-white/46">
+            <span>Eric S.</span>
+            <span className="hidden sm:inline">Web Designer</span>
+            <div className="flex items-center gap-4">
+              <span>Germany</span>
+              <a
+                href="https://github.com/ItsHezy"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Visit Eric S. on GitHub"
+                className="inline-flex items-center justify-center text-white/55 transition-opacity hover:text-white/80"
+              >
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  className="h-4 w-4 fill-current"
+                >
+                  <path d="M12 0.5C5.372 0.5 0 5.873 0 12.5c0 5.303 3.438 9.8 8.205 11.387.6.11.82-.26.82-.577 0-.286-.01-1.044-.016-2.05-3.338.725-4.042-1.61-4.042-1.61-.546-1.386-1.333-1.755-1.333-1.755-1.09-.744.083-.729.083-.729 1.205.085 1.838 1.237 1.838 1.237 1.07 1.835 2.807 1.305 3.492.998.108-.775.418-1.305.762-1.605-2.665-.303-5.467-1.333-5.467-5.932 0-1.31.468-2.382 1.235-3.222-.124-.303-.535-1.523.117-3.176 0 0 1.008-.323 3.3 1.23a11.5 11.5 0 0 1 3.005-.404c1.02.005 2.047.138 3.005.404 2.29-1.553 3.297-1.23 3.297-1.23.654 1.653.243 2.873.12 3.176.77.84 1.233 1.912 1.233 3.222 0 4.61-2.807 5.625-5.48 5.922.43.37.814 1.102.814 2.222 0 1.606-.015 2.9-.015 3.293 0 .32.216.693.825.575C20.565 22.295 24 17.8 24 12.5 24 5.873 18.627 0.5 12 0.5Z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div className="grid flex-1 gap-16 py-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(340px,0.8fr)] lg:items-center">
+            <div className="max-w-4xl">
+              <p className={`${eyebrowClass} hero-kicker-enter`}>
+                Editorial Web Design
+              </p>
+              <h1 className="hero-title-enter mt-8 max-w-4xl font-serif text-[4.4rem] leading-[0.88] tracking-[-0.06em] text-[#f6f3ee] sm:text-[5.8rem] lg:text-[8.6rem]">
+                Eric S.
+              </h1>
+              <p className="hero-copy-enter mt-8 max-w-2xl text-lg leading-8 text-[#ebe5dc]/72 sm:text-xl lg:text-[1.4rem] lg:leading-9">
+                Web Designer {"\u2014"} I build modern websites for businesses
+                that deserve better.
+              </p>
+              <p className="hero-copy-enter mt-6 max-w-xl text-sm uppercase tracking-[0.28em] text-white/38">
+                Designed to feel more like a private publication than a mass-made template.
+              </p>
+              <div className="hero-actions-enter mt-12 flex flex-col gap-4 sm:flex-row sm:items-center">
+                <a
+                  href="#contact"
+                  className="premium-button inline-flex w-full items-center justify-center rounded-full border border-white/14 bg-white/[0.03] px-7 py-3.5 text-sm font-medium uppercase tracking-[0.2em] text-white/84 hover:-translate-y-0.5 hover:border-white/24 hover:bg-white/[0.06] sm:w-auto"
+                >
+                  Let&apos;s Talk
+                </a>
+                <a
+                  href="#services"
+                  className="glass-button inline-flex items-center justify-center rounded-full border border-white/12 px-7 py-3.5 text-sm uppercase tracking-[0.2em] text-white/62 hover:border-[#78bfff]/30 hover:text-white sm:w-auto"
+                >
+                  See Pricing
+                </a>
+              </div>
+            </div>
+            <div
+              className={`${cardClass} hero-panel hero-panel-enter relative border-white/12 hover-card`}
+            >
+              <div className="hero-panel-ambient hero-panel-ambient-one" />
+              <div className="hero-panel-ambient hero-panel-ambient-two" />
+              <div className="hero-panel-content">
+                <div className="flex items-center gap-4">
+                  <p className="shrink-0 text-[0.72rem] uppercase tracking-[0.34em] text-white/42">
+                    Signature Standard
+                  </p>
+                  <div className="h-px flex-1 bg-gradient-to-r from-white/10 via-[#78bfff]/40 to-transparent" />
+                </div>
+                <div className="mt-8 space-y-8">
+                  <div>
+                    <p className="text-sm text-white/40">First Impression</p>
+                    <p className="mt-3 font-serif text-4xl leading-tight tracking-[-0.04em] text-[#f6f3ee]">
+                      A website should feel tailored, calm, and quietly expensive from the first second.
+                    </p>
+                  </div>
+                  <div className="grid gap-5 border-t border-white/8 pt-6 sm:grid-cols-3 sm:gap-4">
+                    <div>
+                      <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/34">
+                        Tone
+                      </p>
+                      <p className="mt-2 text-sm leading-6 text-white/62">
+                        Quiet, cinematic, and controlled.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/34">
+                        Rhythm
+                      </p>
+                      <p className="mt-2 text-sm leading-6 text-white/62">
+                        Large statements, generous spacing, no visual panic.
+                      </p>
+                    </div>
+                    <div>
+                      <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/34">
+                        Signal
+                      </p>
+                      <p className="mt-2 text-sm leading-6 text-white/62">
+                        Premium enough to raise trust before a word is read.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      <section id="about" className="scroll-mt-20 py-20 sm:py-24">
+        <div className={sectionClass}>
+          <Reveal className={cardClass}>
+            <div className="grid gap-10 lg:grid-cols-[minmax(220px,0.7fr)_minmax(0,1.3fr)] lg:items-start">
+              <div className="max-w-sm">
+                <p className={eyebrowClass}>About Me</p>
+                <h2 className="mt-5 font-serif text-4xl leading-tight tracking-[-0.05em] text-[#f6f3ee] sm:text-5xl">
+                  Quiet luxury, built for the web.
+                </h2>
+                <p className="mt-6 text-sm uppercase tracking-[0.28em] text-white/36">
+                  Small business websites with a magazine mind-set.
+                </p>
+              </div>
+              <div className="space-y-8">
+                <p className="max-w-3xl text-lg leading-9 text-[#ebe5dc]/72 first-letter:float-left first-letter:mr-3 first-letter:font-serif first-letter:text-6xl first-letter:leading-none first-letter:text-[#f6f3ee]">
+                  I&apos;m Eric, a web designer based in Germany creating modern,
+                  clean websites for small businesses. I care about pacing,
+                  composition, and visual restraint, so the final result feels
+                  polished, expensive, and easy to trust without ever becoming
+                  noisy or overdesigned.
+                </p>
+                <div className="grid gap-5 border-t border-white/8 pt-8 sm:grid-cols-3">
+                  <div>
+                    <p className="text-[0.7rem] uppercase tracking-[0.3em] text-white/34">
+                      01
+                    </p>
+                    <p className="mt-3 font-serif text-2xl text-[#f6f3ee]">
+                      Editorial hierarchy
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-[0.7rem] uppercase tracking-[0.3em] text-white/34">
+                      02
+                    </p>
+                    <p className="mt-3 font-serif text-2xl text-[#f6f3ee]">
+                      Clean conversion paths
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-[0.7rem] uppercase tracking-[0.3em] text-white/34">
+                      03
+                    </p>
+                    <p className="mt-3 font-serif text-2xl text-[#f6f3ee]">
+                      Premium visual finish
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Reveal>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section id="work" className="scroll-mt-20 py-20 sm:py-24">
+        <div className={sectionClass}>
+          <Reveal>
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-end">
+              <div className="max-w-3xl">
+                <p className={eyebrowClass}>Selected Work</p>
+                <h2 className="mt-5 font-serif text-4xl leading-tight tracking-[-0.05em] text-[#f6f3ee] sm:text-5xl">
+                  Recent projects shaped with the same calm, editorial eye.
+                </h2>
+              </div>
+              <div className="border-l border-white/8 pl-0 text-sm leading-7 text-white/46 lg:pl-8">
+                A small look at the kind of visual atmosphere and restraint I
+                build into client websites.
+              </div>
+            </div>
+          </Reveal>
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            {projects.map((project, index) => (
+              <Reveal key={project.name} delay={index * 120}>
+                <article className={`${cardClass} hover-card group h-full p-6`}>
+                  <div className="relative h-64 overflow-hidden rounded-[1.8rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.015))] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+                    <Image
+                      src={project.image}
+                      alt={project.alt}
+                      fill
+                      sizes="(min-width: 1024px) 28rem, 100vw"
+                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,6,6,0.08),rgba(6,6,6,0.46))]" />
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.06),transparent_42%)]" />
+                  </div>
+                  <div className="mt-6">
+                    <p className="text-[0.72rem] uppercase tracking-[0.32em] text-white/36">
+                      {project.category}
+                    </p>
+                    <h3 className="mt-4 font-serif text-[2rem] leading-none tracking-[-0.05em] text-[#f6f3ee]">
+                      {project.name}
+                    </h3>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="services" className="scroll-mt-20 py-20 sm:py-24">
+        <div className={sectionClass}>
+          <Reveal>
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_260px] lg:items-end">
+              <div className="max-w-3xl">
+                <p className={eyebrowClass}>Services &amp; Pricing</p>
+                <h2 className="mt-5 font-serif text-4xl leading-tight tracking-[-0.05em] text-[#f6f3ee] sm:text-5xl">
+                  Three sharply cut editions, priced to keep things moving.
+                </h2>
+                <p className="mt-6 max-w-2xl text-lg leading-8 text-white/62">
+                  Each package is designed to stay simple, look refined, and
+                  give small businesses a noticeably stronger digital presence
+                  without layers of unnecessary complexity.
+                </p>
+              </div>
+              <div className="border-l border-white/8 pl-0 text-sm leading-7 text-white/46 lg:pl-8">
+                Think of these less like generic packages and more like curated
+                editorial editions: focused, composed, and deliberately clean.
+              </div>
+            </div>
+          </Reveal>
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            {offerings.map((offering, index) => (
+              <Reveal
+                key={offering.name}
+                delay={index * 120}
+                className={`h-full ${offering.featured ? "lg:-translate-y-5" : ""}`}
+              >
+                <article
+                  className={`hover-card group relative flex h-full flex-col overflow-hidden rounded-[2.25rem] border p-8 shadow-[0_28px_100px_rgba(0,0,0,0.32)] backdrop-blur-xl ${
+                    offering.featured
+                      ? "border-white/20 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.04))]"
+                      : "border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))]"
+                  }`}
+                >
+                  <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <p className="text-[0.72rem] uppercase tracking-[0.34em] text-white/36">
+                        Edition {index + 1}
+                      </p>
+                      <p className="mt-5 font-serif text-[2.35rem] leading-none tracking-[-0.05em] text-[#f6f3ee]">
+                        {offering.name}
+                      </p>
+                      <p className="mt-4 text-sm leading-7 text-white/58">
+                        {offering.summary}
+                      </p>
+                    </div>
+                    {offering.featured ? (
+                      <span className="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.2em] text-white/46">
+                        <span className="h-1.5 w-1.5 rounded-full bg-white/46" />
+                        Most Popular
+                      </span>
+                    ) : null}
+                  </div>
+                  <div className="mt-10 border-t border-white/8 pt-7">
+                    <p className="text-[0.68rem] uppercase tracking-[0.28em] text-white/30">
+                      Investment
+                    </p>
+                  </div>
+                  <p className="mt-4 font-serif text-6xl tracking-[-0.07em] text-[#f6f3ee]">
+                    {offering.price}
+                  </p>
+                  <ul className="mt-8 space-y-3 text-sm text-white/66">
+                    {offering.features.map((feature) => (
+                      <li key={feature} className="flex items-center gap-3">
+                        <span className="h-2 w-2 rounded-full bg-[#78bfff]" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" className="scroll-mt-20 py-20 sm:py-24">
+        <div className={sectionClass}>
+          <Reveal className={cardClass}>
+            <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+              <div className="max-w-lg">
+                <p className={eyebrowClass}>Contact</p>
+                <h2 className="mt-5 font-serif text-4xl leading-tight tracking-[-0.05em] text-[#f6f3ee] sm:text-5xl">
+                  Let&apos;s make your business look like the obvious choice.
+                </h2>
+                <p className="mt-6 text-base leading-8 text-white/60">
+                  Send a quick message with your business, timeline, and what
+                  kind of site you need. I&apos;ll come back with a clean,
+                  practical next step instead of a wall of jargon.
+                </p>
+                <div className={ruleClass} />
+                <p className="mt-8 text-sm uppercase tracking-[0.28em] text-white/34">
+                  Minimal process. Premium finish. No clutter.
+                </p>
+              </div>
+              <div>
+                <ContactForm email="hezy.rne@gmail.com" inputClass={inputClass} />
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+    </main>
   );
 }

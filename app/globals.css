@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #f6f3ee;
+  --muted: #b7b2a9;
+  --border: rgba(255, 255, 255, 0.09);
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-strong: rgba(255, 255, 255, 0.08);
+  --accent: #78bfff;
+  --accent-soft: rgba(120, 191, 255, 0.16);
+  color-scheme: dark;
 }
 
 @theme inline {
@@ -10,17 +17,377 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-cormorant);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: var(--background);
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  text-rendering: optimizeLegibility;
+  background:
+    radial-gradient(circle at top left, rgba(120, 191, 255, 0.17), transparent 28%),
+    radial-gradient(circle at 84% 12%, rgba(120, 191, 255, 0.1), transparent 20%),
+    linear-gradient(180deg, #121316 0%, #0a0a0a 28%, #060606 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.025) 0,
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px,
+      transparent 180px
+    ),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05), transparent 20%),
+    radial-gradient(circle at bottom right, rgba(120, 191, 255, 0.08), transparent 26%);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.68), transparent 90%);
+  z-index: -1;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: auto auto -18rem 45%;
+  width: 38rem;
+  height: 38rem;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(120, 191, 255, 0.14), transparent 68%);
+  filter: blur(30px);
+  z-index: -1;
+}
+
+* {
+  border-color: var(--border);
+}
+
+::selection {
+  background: rgba(120, 191, 255, 0.26);
+  color: #08111b;
+}
+
+a,
+button {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    opacity 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 820ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 820ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal[data-visible="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.masthead-enter {
+  animation: masthead-in 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-kicker-enter {
+  animation: rise-in 900ms 120ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-title-enter {
+  animation: rise-in 1100ms 180ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-copy-enter {
+  animation: rise-in 1000ms 300ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-actions-enter {
+  animation: rise-in 1000ms 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-panel-enter {
+  animation: panel-in 1200ms 220ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  filter: blur(12px);
+  opacity: 0.9;
+}
+
+.hero-orb-one {
+  top: 7%;
+  left: 2%;
+  width: 24rem;
+  height: 24rem;
+  background: radial-gradient(circle, rgba(120, 191, 255, 0.18), transparent 68%);
+  animation: drift-one 16s ease-in-out infinite alternate;
+}
+
+.hero-orb-two {
+  right: 4%;
+  bottom: 10%;
+  width: 16rem;
+  height: 16rem;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.09), transparent 70%);
+  animation: drift-two 18s ease-in-out infinite alternate;
+}
+
+.hero-line {
+  position: absolute;
+  inset: 18% 0 auto;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(120, 191, 255, 0.55) 52%,
+    rgba(255, 255, 255, 0.2) 80%,
+    transparent 100%
+  );
+  opacity: 0.45;
+  animation: line-shift 8s ease-in-out infinite;
+}
+
+.premium-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.22) 30%,
+    transparent 60%
+  );
+  transform: translateX(-130%);
+  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.premium-button:hover::after {
+  transform: translateX(130%);
+}
+
+.glass-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-button::before {
+  content: "";
+  position: absolute;
+  inset: auto 18% 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(120, 191, 255, 0.6), transparent);
+  transform: scaleX(0.25);
+  transform-origin: center;
+  transition: transform 220ms ease;
+}
+
+.glass-button:hover::before {
+  transform: scaleX(1);
+}
+
+.hover-card {
+  transition:
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 280ms ease,
+    box-shadow 280ms ease,
+    background 280ms ease;
+}
+
+.hover-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(120, 191, 255, 0.28);
+  box-shadow: 0 34px 120px rgba(0, 0, 0, 0.4);
+}
+
+.hero-panel {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-panel::before {
+  content: none;
+}
+
+.hero-panel-ambient {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-panel-ambient-one {
+  top: 8%;
+  left: -18%;
+  width: 22rem;
+  height: 22rem;
+  background: radial-gradient(circle, rgba(120, 191, 255, 0.2), transparent 68%);
+  filter: blur(18px);
+  animation: drift-three 15s ease-in-out infinite alternate;
+}
+
+.hero-panel-ambient-two {
+  right: -8%;
+  bottom: -16%;
+  width: 16rem;
+  height: 16rem;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08), transparent 72%);
+  filter: blur(16px);
+  animation: drift-two 18s ease-in-out infinite alternate;
+}
+
+.hero-panel-content {
+  position: relative;
+  z-index: 1;
+}
+
+.section-rule {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.22) 18%,
+    rgba(120, 191, 255, 0.42) 52%,
+    rgba(255, 255, 255, 0.12) 82%,
+    transparent 100%
+  );
+}
+
+@keyframes masthead-in {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes drift-one {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(3.5rem, 1.75rem, 0) scale(1.08);
+  }
+}
+
+@keyframes drift-two {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(-2.5rem, -1.5rem, 0) scale(1.06);
+  }
+}
+
+@keyframes drift-three {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(2rem, -1rem, 0) scale(1.07);
+  }
+}
+
+@keyframes line-shift {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scaleX(0.94);
+  }
+
+  50% {
+    opacity: 0.55;
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal,
+  .reveal[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .masthead-enter,
+  .hero-kicker-enter,
+  .hero-title-enter,
+  .hero-copy-enter,
+  .hero-actions-enter,
+  .hero-panel-enter,
+  .hero-orb-one,
+  .hero-orb-two,
+  .hero-line,
+  .hero-panel-ambient-one,
+  .hero-panel-ambient-two {
+    animation: none !important;
+  }
 }
