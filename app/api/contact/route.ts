@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 const WINDOW_MS = 15 * 60 * 1000;
 const MAX_SUBMISSIONS_PER_WINDOW = 3;
 const submissionWindows = new Map<string, number[]>();
+const DEFAULT_CONTACT_NOTIFICATION_EMAIL = "hezy.rne@gmail.com";
+const DEFAULT_CONTACT_FROM_EMAIL = "Eric S. <onboarding@resend.dev>";
 
 type ContactPayload = {
   name?: unknown;
@@ -47,6 +49,90 @@ function normalizeField(value: unknown) {
 
 function isValidEmail(value: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+async function sendContactNotificationEmail({
+  name,
+  email,
+  message,
+}: {
+  name: string;
+  email: string;
+  message: string;
+}) {
+  const resendApiKey = process.env.RESEND_API_KEY;
+
+  if (!resendApiKey) {
+    return { attempted: false as const, sent: false as const };
+  }
+
+  const to =
+    process.env.CONTACT_NOTIFICATION_EMAIL ??
+    DEFAULT_CONTACT_NOTIFICATION_EMAIL;
+  const from =
+    process.env.CONTACT_FROM_EMAIL ?? DEFAULT_CONTACT_FROM_EMAIL;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.ericdev.de";
+
+  const text = [
+    "New inquiry from Eric S. portfolio",
+    "",
+    `Name: ${name}`,
+    `Email: ${email}`,
+    "",
+    "Message:",
+    message,
+    "",
+    `Reply to: ${email}`,
+    `Sent from: ${siteUrl}`,
+  ].join("\n");
+
+  const html = `
+    <div style="font-family:Inter,Arial,sans-serif;line-height:1.6;color:#111827">
+      <h2 style="margin:0 0 16px">New inquiry from Eric S. portfolio</h2>
+      <p style="margin:0 0 8px"><strong>Name:</strong> ${escapeHtml(name)}</p>
+      <p style="margin:0 0 8px"><strong>Email:</strong> ${escapeHtml(email)}</p>
+      <p style="margin:20px 0 8px"><strong>Message:</strong></p>
+      <div style="white-space:pre-wrap;border:1px solid #e5e7eb;border-radius:12px;padding:16px;background:#f9fafb">${escapeHtml(
+        message,
+      )}</div>
+      <p style="margin:20px 0 0"><strong>Reply to:</strong> ${escapeHtml(email)}</p>
+      <p style="margin:8px 0 0"><strong>Sent from:</strong> ${escapeHtml(siteUrl)}</p>
+    </div>
+  `;
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${resendApiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from,
+      to: [to],
+      subject: `New inquiry from ${name}`,
+      reply_to: email,
+      text,
+      html,
+    }),
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    const details = await response.text();
+    console.error("Resend contact notification failed:", details);
+    return { attempted: true as const, sent: false as const };
+  }
+
+  return { attempted: true as const, sent: true as const };
 }
 
 export async function POST(request: NextRequest) {
@@ -124,6 +210,18 @@ export async function POST(request: NextRequest) {
     return jsonError(
       "Something went wrong while sending your message. Please try again or email me directly.",
       500,
+    );
+  }
+
+  const emailResult = await sendContactNotificationEmail({
+    name,
+    email,
+    message,
+  });
+
+  if (emailResult.attempted && !emailResult.sent) {
+    console.warn(
+      "Contact message saved to Supabase, but the notification email was not delivered.",
     );
   }
 
