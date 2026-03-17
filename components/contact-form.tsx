@@ -10,8 +10,11 @@ type ContactFormProps = {
 
 export function ContactForm({ email, inputClass }: ContactFormProps) {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [feedback, setFeedback] = useState("");
+  const [hasError, setHasError] = useState(false);
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const form = event.currentTarget;
@@ -20,13 +23,75 @@ export function ContactForm({ email, inputClass }: ContactFormProps) {
       return;
     }
 
-    form.reset();
-    setIsSubmitted(true);
+    const formData = new FormData(form);
+    const payload = {
+      name: String(formData.get("name") ?? ""),
+      email: String(formData.get("email") ?? ""),
+      message: String(formData.get("message") ?? ""),
+      companyWebsite: String(formData.get("companyWebsite") ?? ""),
+    };
+
+    setIsSubmitting(true);
+    setFeedback("");
+    setHasError(false);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const data = (await response.json().catch(() => null)) as
+        | { message?: string }
+        | null;
+
+      if (!response.ok) {
+        setIsSubmitted(false);
+        setHasError(true);
+        setFeedback(
+          data?.message ??
+            "Something went wrong. Please try again or email me directly.",
+        );
+        return;
+      }
+
+      form.reset();
+      setIsSubmitted(true);
+      setHasError(false);
+      setFeedback(data?.message ?? "Thanks. Your message has been sent.");
+    } catch {
+      setIsSubmitted(false);
+      setHasError(true);
+      setFeedback(
+        "Something went wrong. Please try again or email me directly.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
+
+  function handleFieldChange() {
+    setIsSubmitted(false);
+    setHasError(false);
+    setFeedback("");
   }
 
   return (
     <div>
       <form className="space-y-5" onSubmit={handleSubmit}>
+        <div className="hidden" aria-hidden="true">
+          <label htmlFor="companyWebsite">Company website</label>
+          <input
+            id="companyWebsite"
+            name="companyWebsite"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+          />
+        </div>
         <div>
           <label
             htmlFor="name"
@@ -41,7 +106,7 @@ export function ContactForm({ email, inputClass }: ContactFormProps) {
             required
             className={inputClass}
             placeholder="Your name"
-            onChange={() => setIsSubmitted(false)}
+            onChange={handleFieldChange}
           />
         </div>
         <div>
@@ -58,7 +123,7 @@ export function ContactForm({ email, inputClass }: ContactFormProps) {
             required
             className={inputClass}
             placeholder="your@email.com"
-            onChange={() => setIsSubmitted(false)}
+            onChange={handleFieldChange}
           />
         </div>
         <div>
@@ -75,14 +140,15 @@ export function ContactForm({ email, inputClass }: ContactFormProps) {
             rows={6}
             className={`${inputClass} resize-y`}
             placeholder="Tell me a little about your business and what you need."
-            onChange={() => setIsSubmitted(false)}
+            onChange={handleFieldChange}
           />
         </div>
         <button
           type="submit"
-          className="inline-flex items-center justify-center rounded-full border border-[#78bfff]/30 bg-[#78bfff] px-6 py-3 text-sm font-medium uppercase tracking-[0.22em] text-[#07111d] shadow-[0_0_40px_rgba(120,191,255,0.16)] hover:-translate-y-0.5 hover:bg-[#9cd0ff]"
+          disabled={isSubmitting}
+          className="inline-flex items-center justify-center rounded-full border border-[#78bfff]/30 bg-[#78bfff] px-6 py-3 text-sm font-medium uppercase tracking-[0.22em] text-[#07111d] shadow-[0_0_40px_rgba(120,191,255,0.16)] hover:-translate-y-0.5 hover:bg-[#9cd0ff] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
         >
-          Send
+          {isSubmitting ? "Sending..." : "Send"}
         </button>
       </form>
       <p className="mt-6 text-sm text-white/44">
@@ -94,10 +160,16 @@ export function ContactForm({ email, inputClass }: ContactFormProps) {
           {email}
         </a>
       </p>
-      <p aria-live="polite" className="mt-3 min-h-6 text-sm text-[#b7deff]">
-        {isSubmitted
-          ? "Thanks. For now, the fastest way to reach me is by email."
-          : ""}
+      <p
+        aria-live="polite"
+        className={`mt-3 min-h-6 text-sm ${
+          hasError ? "text-[#ffb3b3]" : "text-[#b7deff]"
+        }`}
+      >
+        {feedback ||
+          (isSubmitted
+            ? "Thanks. Your message has been sent."
+            : "")}
       </p>
     </div>
   );
